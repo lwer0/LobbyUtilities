@@ -12,6 +12,7 @@ public class Main extends JavaPlugin {
     
     @Override
     public void onEnable() {
+        instance = this;
         this.getLogger().info("LobbyUtils has been loaded correctly");
         this.getServer().getPluginManager().registerEvents(new LobbyListener(instance), instance);
         
