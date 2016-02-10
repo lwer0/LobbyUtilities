@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.lwer0.lobbyutilities;
 
 import org.bukkit.Bukkit;
@@ -10,15 +5,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 
-/**
- *
- * @author Joel
- */
 class LobbyListener implements Listener {
     
     private final Main plugin;
@@ -36,10 +28,10 @@ class LobbyListener implements Listener {
                 p.sendMessage("Remember to config LobbyUtilities in /plugins/LobbyUtilities");
             }
         }
-        if (plugin.config.getBoolean("JoinExtraMSG")) {
-            p.sendMessage(plugin.config.getString("MessageExtra"));
-            if (plugin.config.getBoolean("SoundOnJoin")) {
-                sound = plugin.config.getString("sound");
+        if (plugin.config.getBoolean("LobbyUtils.JoinExtraMSG")) {
+            p.sendMessage(plugin.config.getString("LobbyUtils.Message.MessageExtra"));
+            if (plugin.config.getBoolean("LobbyUtils.SoundOnJoin")) {
+                sound = plugin.config.getString("LobbyUtils.Sounds.sound");
                 Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "playsound"+ " " + sound + p);
             }
         }
@@ -66,8 +58,16 @@ class LobbyListener implements Listener {
         Player p = (Player) event.getPlayer();
         if (!p.hasPermission("lobbyutils.flykick.bypass")) {
             if (p.isFlying()) {
-                p.kickPlayer(plugin.getConfig().getString("PlayerKickMessage"));
+                p.kickPlayer(plugin.getConfig().getString("LobbyUtils.PlayerKickMessage"));
             }
+        }
+    }
+    
+    @EventHandler
+    public void onBreak(BlockBreakEvent event) {
+        Player p = (Player) event.getPlayer();
+        if (!p.hasPermission("lobbyutils.build")) {
+            event.setCancelled(true);
         }
     }
     
