@@ -1,0 +1,12 @@
+#This is just to notify you that you have to config that plugin!
+DisableThis: true
+#---------------------------------------------------------------
+LobbyUtils:
+    JoinExtraMSG: true
+    Message:
+        MessageExtra: Thanks for joining! Buy VIP on shop.buycraft.es
+    SoundOnJoin: true
+#You can easy configure with our wiki: https://github.com/lwer0/LobbyUtilities/wiki/Sounds
+    Sounds:
+        sound: mob.horse.hit
+    PlayerKickMessage: You can't fly if you are not VIP or ADMIN!
